@@ -1,8 +1,7 @@
 package frc.robot;
 
-import com.revrobotics.CANSparkMax;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -10,13 +9,11 @@ import java.text.SimpleDateFormat;
 
 public class Robot extends TimedRobot {
 
-    private CANSparkMax m_FrontLeft;
-    private CANSparkMax m_FrontRight;
-    private CANSparkMax m_BackLeft;
-    private CANSparkMax m_BackRight;
+    private WPI_VictorSPX m_FrontLeft;
+    private WPI_VictorSPX m_FrontRight;
+    private WPI_VictorSPX m_BackLeft;
+    private WPI_VictorSPX m_BackRight;
 
-    private SpeedControllerGroup m_LeftPair;
-    private SpeedControllerGroup m_RightPair;
     private DifferentialDrive m_Drivetrain;
 
     private Joystick m_Joystick;
@@ -27,6 +24,15 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        
+
+        m_FrontLeft = new WPI_VictorSPX(0);
+        m_FrontRight = new WPI_VictorSPX(1);
+        m_BackLeft = new WPI_VictorSPX(2);
+        m_BackRight = new WPI_VictorSPX(3);
+
+        m_Drivetrain = new DifferentialDrive(m_FrontLeft, m_FrontRight);
+
+        m_Joystick = new Joystick(0);
+
     }
 }
